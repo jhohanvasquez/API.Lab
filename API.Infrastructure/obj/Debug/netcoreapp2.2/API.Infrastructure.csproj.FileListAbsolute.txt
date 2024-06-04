@@ -1,0 +1,13 @@
+C:\Documentos\Plan Carrera Nivel 1\Codigo\API Lab\API.Infrastructure\bin\Debug\netcoreapp2.2\API.Infrastructure.deps.json
+C:\Documentos\Plan Carrera Nivel 1\Codigo\API Lab\API.Infrastructure\bin\Debug\netcoreapp2.2\API.Infrastructure.dll
+C:\Documentos\Plan Carrera Nivel 1\Codigo\API Lab\API.Infrastructure\bin\Debug\netcoreapp2.2\API.Infrastructure.pdb
+C:\Documentos\Plan Carrera Nivel 1\Codigo\API Lab\API.Infrastructure\bin\Debug\netcoreapp2.2\API.Domain.dll
+C:\Documentos\Plan Carrera Nivel 1\Codigo\API Lab\API.Infrastructure\bin\Debug\netcoreapp2.2\API.Domain.pdb
+C:\Documentos\Plan Carrera Nivel 1\Codigo\API Lab\API.Infrastructure\obj\Debug\netcoreapp2.2\API.Infrastructure.csproj.AssemblyReference.cache
+C:\Documentos\Plan Carrera Nivel 1\Codigo\API Lab\API.Infrastructure\obj\Debug\netcoreapp2.2\API.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Documentos\Plan Carrera Nivel 1\Codigo\API Lab\API.Infrastructure\obj\Debug\netcoreapp2.2\API.Infrastructure.AssemblyInfoInputs.cache
+C:\Documentos\Plan Carrera Nivel 1\Codigo\API Lab\API.Infrastructure\obj\Debug\netcoreapp2.2\API.Infrastructure.AssemblyInfo.cs
+C:\Documentos\Plan Carrera Nivel 1\Codigo\API Lab\API.Infrastructure\obj\Debug\netcoreapp2.2\API.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Documentos\Plan Carrera Nivel 1\Codigo\API Lab\API.Infrastructure\obj\Debug\netcoreapp2.2\API.Infr.761B175E.Up2Date
+C:\Documentos\Plan Carrera Nivel 1\Codigo\API Lab\API.Infrastructure\obj\Debug\netcoreapp2.2\API.Infrastructure.dll
+C:\Documentos\Plan Carrera Nivel 1\Codigo\API Lab\API.Infrastructure\obj\Debug\netcoreapp2.2\API.Infrastructure.pdb
