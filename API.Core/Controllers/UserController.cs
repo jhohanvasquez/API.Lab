@@ -44,12 +44,12 @@ namespace API.Core.Controllers
 
         [HttpGet]
         [Route("GetUsers")]
-        public ActionResult<List<User>> GetUsers(string cedula)
+        public async Task<ActionResult<Task<List<User>>>> GetUsersAsync(string cedula)
         {
             try
             {
-                var userRepo = _userService.GetUser(cedula);
-                return Ok(_mapper.Map<List<UserDTO>>(userRepo));
+                var userRepo = await _userService.GetUser(cedula);
+                return Ok(userRepo);
             }
             catch (Exception ex)
             {
