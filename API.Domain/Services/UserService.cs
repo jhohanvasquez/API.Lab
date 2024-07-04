@@ -26,11 +26,11 @@ namespace API.Domain.Services
 
         #region Public Members
 
-        public async Task<List<User>> GetUser(string email)
+        public async Task<List<User>> GetUser(string cedula)
         {
             try
             {
-                return await this.userRepository.GetUser(email);
+                return await this.userRepository.GetUser(cedula);
 
             }
             catch (Exception ex)

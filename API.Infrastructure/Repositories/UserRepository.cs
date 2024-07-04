@@ -55,12 +55,12 @@ namespace API.Infrastructure.Repositories
             return queryParameters;
         }
 
-        public async Task<List<User>> GetUser(string email)
+        public async Task<List<User>> GetUser(string cedula)
         {
             try
             {
                 var queryParameters = new DynamicParameters();
-                queryParameters.Add("@email", email);
+                queryParameters.Add("@cedula", cedula);
                 var readers = await this.dbManager.ExecuteReaderStoreProcedure(sqlSettings.SPGetUser, queryParameters);
 
                 return MapUsers(readers);

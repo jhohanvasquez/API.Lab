@@ -10,6 +10,6 @@ namespace API.Domain.Contracts
     {
         Task SaveUser(User data);
 
-        Task<List<User>> GetUser(string email);
+        Task<List<User>> GetUser(string cedula);
     }
 }
