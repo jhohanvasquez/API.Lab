@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using API.Infrastructure.Mappers;
 using API.Infrastructure.Mappers.AutoMapper;
 
-namespace Satrack.SafeVehicle
+namespace API.Core
 {
     public class Program
     {

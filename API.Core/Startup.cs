@@ -19,8 +19,10 @@ using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Microsoft.AspNetCore.Http;
+using API.Domain.DTOs;
 
-namespace Satrack.SafeVehicle
+namespace API.Core
 {
     public class Startup
     {
@@ -34,15 +36,9 @@ namespace Satrack.SafeVehicle
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.Configure<DataBaseSettings>(Configuration.GetSection(typeof(DataBaseSettings).Name));
+            services.AddMvcCore().AddApiExplorer();
 
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-            {
-                builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
-            }));
+            services.Configure<DataBaseSettings>(Configuration.GetSection(typeof(DataBaseSettings).Name));
 
             IMapper mapper = new MapperConfiguration(map =>
             {
@@ -53,13 +49,18 @@ namespace Satrack.SafeVehicle
 
             services.Configure<ApiSettings>(Configuration);
 
+            services.AddTransient<IDbManager<LogUserDTO>>(s => new DbManager<LogUserDTO>(Configuration.GetValue<string>("environmentVariables:SqlSettings:BDUserConnectionString")));
+            services.AddTransient<IDbManager<UserDTO>>(s => new DbManager<UserDTO>(Configuration.GetValue<string>("environmentVariables:SqlSettings:BDUserConnectionString")));
+            
             services.AddScoped<IUserService, UserService>();
-           
+            services.AddScoped<IUserRepository, UserRepository>();
+
+
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "Safe api for Safe Vehicles", Version = "v1" });
                 var basePath = AppContext.BaseDirectory;
-                var xmlPath = Path.Combine(basePath, "Satrack.SafeVehicle.xml");
+                var xmlPath = Path.Combine(basePath, "API.Core.xml");
                 options.IncludeXmlComments(xmlPath);
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
@@ -108,6 +109,16 @@ namespace Satrack.SafeVehicle
                        });
             });
 
+            //Enable CORS
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod()
+                  .AllowAnyHeader());
+            });
+
+            services.AddControllers();
+
+            services.AddAuthorization();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -117,8 +128,32 @@ namespace Satrack.SafeVehicle
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler(appBuilder =>
+                {
+                    appBuilder.Run(async context =>
+                    {
+                        context.Response.StatusCode = 500;
+                        await context.Response.WriteAsync("An unexpected fault happened. Try again later");
+                    });
+                });
+            }
 
-            app.UseCors("MyPolicy");
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             //Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
@@ -129,7 +164,7 @@ namespace Satrack.SafeVehicle
                 c.RoutePrefix = "swagger";
             });
 
-            app.UseMvc();
+
         }
     }
 }
