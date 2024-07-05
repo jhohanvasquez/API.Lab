@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API.Domain.Contracts
 {
-    public interface IUserRepository : IDisposable
+    public interface IUserRepository
     {
         Task SaveUser(User data);
 

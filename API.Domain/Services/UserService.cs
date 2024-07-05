@@ -14,11 +14,7 @@ namespace API.Domain.Services
 {
     public class UserService : IUserService
     {
-
         private readonly IUserRepository userRepository;
-
-        bool disposed = false;
-
         public UserService(IUserRepository userRepository)
         {
             this.userRepository = userRepository;
@@ -51,28 +47,6 @@ namespace API.Domain.Services
             }
         }
 
-        #endregion
-
-
-        #region IDisposable Support
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposed)
-                return;
-
-            if (disposing)
-            {
-                userRepository.Dispose();
-            }
-
-            disposed = true;
-        }
         #endregion
 
     }

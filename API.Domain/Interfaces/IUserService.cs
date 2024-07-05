@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API.Domain.Interfaces
 {
-    public interface IUserService : IDisposable
+    public interface IUserService
     {
         void SendUser(User user);
         Task<List<User>> GetUser(string email);

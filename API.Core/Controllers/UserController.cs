@@ -17,14 +17,9 @@ namespace API.Core.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly SqlSettings _settings;
-        private readonly IMapper _mapper;
-
-        public UserController(IUserService userService, IOptions<ApiSettings> settings, IMapper mapper)
+        public UserController(IUserService userService)
         {
             _userService = userService;
-            _settings = settings.Value.environmentVariables.SqlSettings;
-            _mapper = mapper;
         }
 
         [HttpPost]
@@ -44,12 +39,19 @@ namespace API.Core.Controllers
 
         [HttpGet]
         [Route("GetUsers")]
-        public async Task<ActionResult<Task<List<User>>>> GetUsersAsync(string cedula)
+        public async Task<ActionResult<Task<List<User>>>> GetUsers(string cedula)
         {
             try
             {
                 var userRepo = await _userService.GetUser(cedula);
-                return Ok(userRepo);
+                if (userRepo.Count > 0)
+                {
+                    return Ok(userRepo);
+                }
+                else
+                {
+                    return NoContent();
+                }
             }
             catch (Exception ex)
             {
